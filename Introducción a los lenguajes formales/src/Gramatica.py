@@ -42,7 +42,7 @@ class Gramatica:
         return lenguaje_generado
     
     def __generar_lenguaje_recursivo(self, simbolo_actual: Sarta, cadena_actual: Sarta, lenguaje_generado: Lenguaje, max_producciones: int):
-        if max_producciones >=0:
+        if max_producciones >0:
             if simbolo_actual not in self.__simbolos_no_terminales:
                 lenguaje_generado.add(cadena_actual*simbolo_actual)
             else:
