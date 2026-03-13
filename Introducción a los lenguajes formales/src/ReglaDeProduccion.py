@@ -1,10 +1,10 @@
 from Sarta import Sarta
 
 class ReglaDeProduccion:
-    __simboloNoTerminal: Sarta
+    __simboloNoTerminal: str
     __sartas_posibles: set[Sarta]
     
-    def __init__(self, simboloNoTerminal: Sarta, sartas_posibles: set[Sarta]):
+    def __init__(self, simboloNoTerminal: str, sartas_posibles: set[Sarta]):
         self.__simboloNoTerminal = simboloNoTerminal
         self.__sartas_posibles = sartas_posibles
 
@@ -16,7 +16,7 @@ class ReglaDeProduccion:
         return self.__simboloNoTerminal
     
     @simbolo_no_terminal.setter
-    def simbolo_no_terminal(self, simboloNoTerminal: Sarta):
+    def simbolo_no_terminal(self, simboloNoTerminal: str):
         self.__simboloNoTerminal = simboloNoTerminal
     
     @property
