@@ -4,11 +4,11 @@ from ReglaDeProduccion import ReglaDeProduccion
 
 class Gramatica:
     __simbolo_inicial: str
-    __simbolos_no_terminales: Lenguaje
-    __simbolos_terminales: Lenguaje
+    __simbolos_no_terminales: set[str]
+    __simbolos_terminales: set[str]
     __reglas_de_produccion: set[ReglaDeProduccion]
     
-    def __init__(self, simbolo_inicial: str, v_n: Lenguaje, v_t: Lenguaje, reglas_de_produccion: set[ReglaDeProduccion]):
+    def __init__(self, simbolo_inicial: str, v_n: set[str], v_t: set[str], reglas_de_produccion: set[ReglaDeProduccion]):
         self.__simbolo_inicial = simbolo_inicial
         self.__simbolos_no_terminales = v_n
         self.__simbolos_terminales = v_t
