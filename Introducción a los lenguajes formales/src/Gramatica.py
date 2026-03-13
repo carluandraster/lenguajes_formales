@@ -3,12 +3,12 @@ from Lenguaje import Lenguaje
 from ReglaDeProduccion import ReglaDeProduccion
 
 class Gramatica:
-    __simbolo_inicial: Sarta
+    __simbolo_inicial: str
     __simbolos_no_terminales: Lenguaje
     __simbolos_terminales: Lenguaje
     __reglas_de_produccion: set[ReglaDeProduccion]
     
-    def __init__(self, simbolo_inicial: Sarta, v_n: Lenguaje, v_t: Lenguaje, reglas_de_produccion: set[ReglaDeProduccion]):
+    def __init__(self, simbolo_inicial: str, v_n: Lenguaje, v_t: Lenguaje, reglas_de_produccion: set[ReglaDeProduccion]):
         self.__simbolo_inicial = simbolo_inicial
         self.__simbolos_no_terminales = v_n
         self.__simbolos_terminales = v_t
@@ -23,7 +23,7 @@ class Gramatica:
         return self.__simbolo_inicial
     
     @simbolo_inicial.setter
-    def simbolo_inicial(self, simbolo_inicial: Sarta):
+    def simbolo_inicial(self, simbolo_inicial: str):
         self.__simbolo_inicial = simbolo_inicial
     
     @property
@@ -38,7 +38,7 @@ class Gramatica:
     
     def generar_lenguaje(self, max_producciones: int) -> Lenguaje:
         lenguaje_generado = Lenguaje()
-        self.__generar_lenguaje_recursivo(self.__simbolo_inicial, lenguaje_generado, max_producciones)
+        self.__generar_lenguaje_recursivo(Sarta(self.__simbolo_inicial), lenguaje_generado, max_producciones)
         return lenguaje_generado
     
     def __generar_lenguaje_recursivo(self, sarta_actual: Sarta, lenguaje_generado: Lenguaje, max_producciones: int):
