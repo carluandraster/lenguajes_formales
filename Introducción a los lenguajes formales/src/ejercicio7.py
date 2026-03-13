@@ -5,8 +5,8 @@ from Gramatica import Gramatica
 
 G = Gramatica(
     "S",
-    Lenguaje({"S"}),
-    Lenguaje({"a", "b", "c", "0", "1"}),
+    {"S"},
+    {"a", "b", "c", "0", "1"},
     {
         ReglaDeProduccion("S", {Sarta("a"), Sarta("b"), Sarta("c"), Sarta("Sa"), Sarta("Sb"), Sarta("Sc"), Sarta("S0"), Sarta("S1")})
     }
