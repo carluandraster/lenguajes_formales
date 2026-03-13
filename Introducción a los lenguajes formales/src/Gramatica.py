@@ -38,15 +38,19 @@ class Gramatica:
     
     def generar_lenguaje(self, max_producciones: int) -> Lenguaje:
         lenguaje_generado = Lenguaje()
-        self.__generar_lenguaje_recursivo(self.__simbolo_inicial, Sarta(''), lenguaje_generado, max_producciones)
+        self.__generar_lenguaje_recursivo(self.__simbolo_inicial, lenguaje_generado, max_producciones)
         return lenguaje_generado
     
-    def __generar_lenguaje_recursivo(self, simbolo_actual: Sarta, cadena_actual: Sarta, lenguaje_generado: Lenguaje, max_producciones: int):
+    def __generar_lenguaje_recursivo(self, sarta_actual: Sarta, lenguaje_generado: Lenguaje, max_producciones: int):
+        tiene_variables = False
         if max_producciones >0:
-            if simbolo_actual not in self.__simbolos_no_terminales:
-                lenguaje_generado.add(cadena_actual*simbolo_actual)
-            else:
-                for regla in self.__reglas_de_produccion:
-                    if regla.simbolo_no_terminal == simbolo_actual:
-                        for sarta in regla.sartas_posibles:
-                            self.__generar_lenguaje_recursivo(sarta, cadena_actual, lenguaje_generado, max_producciones - 1)
+            for i, simbolo in enumerate(sarta_actual):
+                if simbolo in self.__simbolos_no_terminales:
+                    tiene_variables = True
+                    for regla in self.__reglas_de_produccion:
+                        if regla.simbolo_no_terminal == simbolo:
+                            for sarta_posible in regla.sartas_posibles:
+                                nueva_sarta = Sarta(sarta_actual[:i] + sarta_posible + sarta_actual[i+1:])
+                                self.__generar_lenguaje_recursivo(nueva_sarta, lenguaje_generado, max_producciones - 1)
+            if not tiene_variables:
+                lenguaje_generado.add(sarta_actual)
