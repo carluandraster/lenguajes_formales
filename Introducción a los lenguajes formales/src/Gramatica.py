@@ -50,7 +50,7 @@ class Gramatica:
                     for regla in self.__reglas_de_produccion:
                         if regla.simbolo_no_terminal == simbolo:
                             for sarta_posible in regla.sartas_posibles:
-                                nueva_sarta = Sarta(sarta_actual[:i] + sarta_posible + sarta_actual[i+1:])
+                                nueva_sarta = Sarta(sarta_actual[:i]) * sarta_posible * Sarta(sarta_actual[i+1:])
                                 self.__generar_lenguaje_recursivo(nueva_sarta, lenguaje_generado, max_producciones - 1)
             if not tiene_variables:
                 lenguaje_generado.add(sarta_actual)
