@@ -1,9 +1,10 @@
 from Sarta import Sarta
 from Lenguaje import Lenguaje
 from ReglaDeProduccion import ReglaDeProduccion
-from pandas import ExcelWriter
+from Utils.PruebaDeEscritorio import PruebaDeEscritorio
 
-ew = ExcelWriter('Introducción a los lenguajes formales/Prueba de escritorio.xlsx', engine='xlsxwriter')
+PE = PruebaDeEscritorio("Introducción a los lenguajes formales/src/Prueba de escritorio.xlsx",
+["Símbolo Inicial", "Símbolos No Terminales", "Símbolos Terminales", "Reglas de Producción"])
 
 class Gramatica:
     __simbolo_inicial: str
