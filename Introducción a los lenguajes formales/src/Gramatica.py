@@ -1,6 +1,9 @@
 from Sarta import Sarta
 from Lenguaje import Lenguaje
 from ReglaDeProduccion import ReglaDeProduccion
+from pandas import ExcelWriter
+
+ew = ExcelWriter('Introducción a los lenguajes formales/Prueba de escritorio.xlsx', engine='xlsxwriter')
 
 class Gramatica:
     __simbolo_inicial: str
