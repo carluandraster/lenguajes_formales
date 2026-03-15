@@ -18,3 +18,8 @@ class PruebaDeEscritorio:
     def modificar_variable(self, nombre_variable: str, valor: str):
         self.__ws.cell(row=self.__fila, column=self.__cabeceras.index(nombre_variable) + 1, value=valor)
         self.__fila += 1
+    
+    def modificar_variables(self, variables: dict[str, str]):
+        for nombre_variable, valor in variables.items():
+            self.__ws.cell(row=self.__fila, column=self.__cabeceras.index(nombre_variable) + 1, value=valor)
+        self.__fila += 1
