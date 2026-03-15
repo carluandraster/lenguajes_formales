@@ -11,7 +11,9 @@ G = Gramatica(
         ReglaDeProduccion("S", {Sarta("a"), Sarta("b"), Sarta("c"), Sarta("Sa"), Sarta("Sb"), Sarta("Sc"), Sarta("S0"), Sarta("S1")})
     }
 )
+# print(G.reglas_de_produccion)
 L = G.generar_lenguaje(MAX_ELEM)
+print(L)
 
 def resolver(sarta: Sarta) -> None:
     if L.__contains__(sarta):

@@ -11,6 +11,9 @@ class ReglaDeProduccion:
     def __str__(self):
         return f"{self.__simboloNoTerminal} ::= {' | '.join(str(s) for s in self.__sartas_posibles)}"
     
+    def __repr__(self):
+        return self.__str__()
+    
     @property
     def simbolo_no_terminal(self):
         return self.__simboloNoTerminal
