@@ -51,32 +51,27 @@ class Gramatica:
     def __generar_lenguaje_recursivo(self, sarta_actual: Sarta, lenguaje_generado: Lenguaje, limite_palabras: int): 
         # 1. Chequeamos si YA llegamos al límite deseado en toda la ejecución global.
         # Si es así, abortamos inmediatamente cualquier procesamiento extra.
-        if len(lenguaje_generado) >= limite_palabras:
-            return
+        if len(lenguaje_generado) < limite_palabras:
+            tiene_variables = False 
 
-        tiene_variables = False 
+            for i, simbolo in enumerate(sarta_actual):
+                if simbolo in self.__simbolos_no_terminales:
+                    tiene_variables = True
+                    for regla in self.__reglas_de_produccion:
+                        if regla.simbolo_no_terminal == simbolo:
+                            producciones_ordenadas = sorted(regla.sartas_posibles, key=lambda r: self.__cantidad_variables_en_sarta(r))
 
-        for i, simbolo in enumerate(sarta_actual):
-            if simbolo in self.__simbolos_no_terminales:
-                tiene_variables = True
-                for regla in self.__reglas_de_produccion:
-                    if regla.simbolo_no_terminal == simbolo:
-                        producciones_ordenadas = sorted(regla.sartas_posibles, key=lambda r: self.__cantidad_variables_en_sarta(r))
+                            for sarta_posible in producciones_ordenadas:
+                                # Un chequeo extra por si en el medio de este bucle otra rama ya llenó el cupo
+                                if len(lenguaje_generado) >= limite_palabras:
+                                    return 
 
-                        for sarta_posible in producciones_ordenadas:
-                            # Un chequeo extra por si en el medio de este bucle otra rama ya llenó el cupo
-                            if len(lenguaje_generado) >= limite_palabras:
-                                return 
-
-                            nueva_sarta = Sarta(sarta_actual[:i]) * sarta_posible * Sarta(sarta_actual[i+1:])
-                            self.__generar_lenguaje_recursivo(nueva_sarta, lenguaje_generado, limite_palabras)
-                
-                # Acordate de nuestro break de antes para derivar por la izquierda
-                break
-                
-        # 2. Si no tiene variables, es una sarta válida.
-        if not tiene_variables:
-            lenguaje_generado.add(sarta_actual)
+                                nueva_sarta = Sarta(sarta_actual[:i]) * sarta_posible * Sarta(sarta_actual[i+1:])
+                                self.__generar_lenguaje_recursivo(nueva_sarta, lenguaje_generado, limite_palabras)
+                    
+            # 2. Si no tiene variables, es una sarta válida.
+            if not tiene_variables:
+                lenguaje_generado.add(sarta_actual)
 
 # Prueba
 if __name__ == "__main__":
