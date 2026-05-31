@@ -1,0 +1,7 @@
+<clave>::= <cadena>                     ¡(<cadena>.dc = 0 & <cadena>.todo_a_izq) | (<cadena>.dc = 1 & <cadena>.todo_b_der)!
+<cadena> ::= <letra1><cadena'><letra2>  {<cadena>.todo_a_izq << <cadena'>.todo_a_izq & <letra1>.val = a; <cadena>.todo_b_der << <cadena'>.todo_b_der & <letra2>.val = b}
+           | <letra1><digito><letra2>   {<cadena>.dc << <digito>.val; <cadena>.todo_a_izq << <letra1>.val = a; <cadena>.todo_b_der << <letra2>.val = b}
+<letra> ::= a                           <letra>.val << a
+          | b                           <letra>.val << b
+<digito>:: = 0                          <digito>.val << 0
+           | 1                          <digito>.val << 1
