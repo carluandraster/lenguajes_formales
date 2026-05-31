@@ -1,0 +1,12 @@
+<clave>::= <cadena>                     ¡(<cadena>.dc = 0 & <cadena>.di = 0 & <cadena>.dd = 0) | (<cadena>.dc = 1 & <cadena>.capicua)!
+<cadena>::= <letra1><cadena'><letra2>   {<cadena>.di << <cadena'>.di+(<letra1>.val = a)-(<letra1>.val = b);
+                                        <cadena>.dd << <cadena'>.dd+(<letra2>.val = a)-(<letra2>.val = b);
+                                        <cadena>.capicua << <cadena'>.capicua & (<letra1>.val = <letra2>.val)}
+          | <letra1><digito><letra2>    {<cadena>.dc << <digito>.val;
+                                        <cadena>.di << (<letra1>.val = a)-(<letra1>.val = b);
+                                        <cadena>.dd << (<letra2>.val = a)-(<letra2>.val = b);
+                                        <cadena>.capicua << <letra1>.val = <letra2>.val}
+<letra> ::= a                           <letra>.val << a
+          | b                           <letra>.val << b
+<digito>:: = 0                          <digito>.val << 0
+           | 1                          <digito>.val << 1
