@@ -1,0 +1,10 @@
+S' ::= S        ¡S.cx != S.cy & S.cx != S.cz & S.cy != S.cz!
+S1 ::= xS2      {S1.cx << S2.cx+1; S1.cy << S2.cy; S1.cz << S2.cz}
+    | yA        {S1.cx << 0; S1.cy << A.cy+1; S1.cz << A.cz}
+    | zB        {S1.cx << 0; S1.cy << 0; S1.cz << A.cz+1}
+    | λ         {S1.cx << 0; S1.cy << 0; S1.cz << 0}
+A1 ::= yA2      {A1.cy << A2.cy+1; A1.cz << A2.cz}
+    | zB        {A1.cy << 0; A1.cz << B.cz+1}
+    | λ         {A1.cy << 0; A1.cz << 0}
+B1 ::= zB2      B1.cz << B2.cz+1
+    | λ         B1.cz << 0

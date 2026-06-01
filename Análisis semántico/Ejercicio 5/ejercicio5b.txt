@@ -1,0 +1,7 @@
+S ::= XYZ    ¡X.cant != Y.cant & X.cant != Z.cant & Y.cant != Z.cant!
+X ::= xX'    X.cant << X'.cant+1
+    | λ      X.cant << 0
+Y ::= yY'    Y.cant << Y'.cant+1
+    | λ      Y.cant << 0
+Z ::= zZ'    Z.cant << Z'.cant+1
+    | λ      Z.cant << 0
